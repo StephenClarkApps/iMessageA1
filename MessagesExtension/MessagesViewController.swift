@@ -9,16 +9,133 @@
 import UIKit
 import Messages
 
-class MessagesViewController: MSMessagesAppViewController {
+class MessagesViewController: MSMessagesAppViewController, AddMessageViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        
     }
+    
+    
+    func addMessageViewControllerDidSubmit(image: UIImage, caption: String) {
+    
+        // MARK: Define our custom MSMessage
+        
+        let components = NSURLComponents()
+        
+        let layout = MSMessageTemplateLayout()
+        
+        layout.caption = caption
+
+        layout.image = image
+        
+        let message = MSMessage()
+        
+        message.url = components.url!
+        
+        message.layout = layout
+        
+        
+        // we can take the MSMessage we created above and insert it into the
+        // send field in iMessage
+        self.activeConversation?.insert(message,  completionHandler: { (error: Error?) in
+            
+        })
+        
+        
+    }
+    
+    
+   /*
+    @IBAction func sendMessageButtonPressed () {
+        
+        //  let conversation = self.activeConversation
+        
+        // MARK: Define our custom MSMessage
+        let components = NSURLComponents()
+        
+        let layout = MSMessageTemplateLayout()
+        layout.caption = "Cat"
+        
+        layout.subcaption = "subcaption"
+        layout.trailingCaption = "trailing caption"
+        layout.trailingSubcaption = "trailing subcaption"
+        
+        layout.image = UIImage(named: "cat.png")!
+        let message = MSMessage()
+        message.url = components.url!
+        
+        message.layout = layout
+       
+        
+        // we can take the MSMessage we created above and insert it into the
+        // send field in iMessage
+        self.activeConversation?.insert(message,  completionHandler: { (error: Error?) in
+            
+        })
+ 
+        
+     
+     
+        conversation?.insertText("Test of inserting a text into an active conversation.", completionHandler: { (error: Error?) in
+          // error handling
+        })
+
+ 
+    }  */
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    
+    private func presentViewController (for conversation: MSConversation, with presentationStyle: MSMessagesAppPresentationStyle) {
+        
+        var controller: UIViewController!
+        
+        if presentationStyle == .compact {
+            
+            controller = instantiateAddMessageViewController()
+            
+        } else { // expanded
+            controller = instantiateMessageDetailsViewController()
+        }
+        
+        // Embed the new controller
+        addChildViewController(controller)
+        
+        controller.view.frame = view.bounds
+        controller.view.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(controller.view)
+        
+        controller.view.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        controller.view.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        controller.view.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        controller.view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    
+        controller.didMove(toParentViewController: self)
+    }
+    
+    private func instantiateMessageDetailsViewController () -> UIViewController {
+        guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "MessageDetailsViewController") as? MessageDetailsViewController else {
+            fatalError("MessageDetailsViewController not found")
+        }
+        
+        return controller
+        
+    }
+    
+    private func instantiateAddMessageViewController () -> UIViewController {
+        guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "AddMessageViewController") as? AddMessageViewController else {
+            fatalError("AddMessageViewController not found")
+        }
+        
+        return controller
+        
     }
     
     // MARK: - Conversation Handling
@@ -58,15 +175,21 @@ class MessagesViewController: MSMessagesAppViewController {
     }
     
     override func willTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
-        // Called before the extension transitions to a new presentation style.
-    
-        // Use this method to prepare for the change in presentation style.
+        
+        guard let conversation = activeConversation else {
+            fatalError("Expected an active conversation")
+        }
+        
+        presentViewController(for: conversation, with: presentationStyle)
+        
     }
     
     override func didTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
-        // Called after the extension transitions to a new presentation style.
-    
-        // Use this method to finalize any behaviors associated with the change in presentation style.
+        
+        
+        
+        
+        
     }
 
 }

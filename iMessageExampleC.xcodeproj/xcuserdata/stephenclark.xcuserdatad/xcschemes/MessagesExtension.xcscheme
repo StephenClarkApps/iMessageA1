@@ -18,7 +18,7 @@
                BlueprintIdentifier = "86AFC59D1DBE583D00C78884"
                BuildableName = "MessagesExtension.appex"
                BlueprintName = "MessagesExtension"
-               ReferencedContainer = "container:iMessageExampleA.xcodeproj">
+               ReferencedContainer = "container:iMessageExampleC.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -30,9 +30,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "86AFC5931DBE583D00C78884"
-               BuildableName = "iMessageExampleA.app"
-               BlueprintName = "iMessageExampleA"
-               ReferencedContainer = "container:iMessageExampleA.xcodeproj">
+               BuildableName = "iMessageExampleC.app"
+               BlueprintName = "iMessageExampleC"
+               ReferencedContainer = "container:iMessageExampleC.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -50,7 +50,7 @@
             BlueprintIdentifier = "86AFC59D1DBE583D00C78884"
             BuildableName = "MessagesExtension.appex"
             BlueprintName = "MessagesExtension"
-            ReferencedContainer = "container:iMessageExampleA.xcodeproj">
+            ReferencedContainer = "container:iMessageExampleC.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -67,16 +67,33 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "2">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "1"
+         BundleIdentifier = "com.apple.MobileSMS">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "86AFC5931DBE583D00C78884"
-            BuildableName = "iMessageExampleA.app"
-            BlueprintName = "iMessageExampleA"
-            ReferencedContainer = "container:iMessageExampleA.xcodeproj">
+            BlueprintIdentifier = "86AFC59D1DBE583D00C78884"
+            BuildableName = "MessagesExtension.appex"
+            BlueprintName = "MessagesExtension"
+            ReferencedContainer = "container:iMessageExampleC.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </RemoteRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "86AFC59D1DBE583D00C78884"
+            BuildableName = "MessagesExtension.appex"
+            BlueprintName = "MessagesExtension"
+            ReferencedContainer = "container:iMessageExampleC.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "OS_ACTIVITY_MODE"
+            value = "disable"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -92,9 +109,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "86AFC5931DBE583D00C78884"
-            BuildableName = "iMessageExampleA.app"
-            BlueprintName = "iMessageExampleA"
-            ReferencedContainer = "container:iMessageExampleA.xcodeproj">
+            BuildableName = "iMessageExampleC.app"
+            BlueprintName = "iMessageExampleC"
+            ReferencedContainer = "container:iMessageExampleC.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
